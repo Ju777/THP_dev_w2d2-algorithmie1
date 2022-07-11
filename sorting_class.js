@@ -55,9 +55,8 @@ class Sort {
                 this.nbComparisons++;
                 // console.log(`${this.nbComparisons}e comparaison.`)
                 // prompt("[ENTER]");
-                // Swap avec variable temporaire était possible
 
-                // Swap avec déstructuration
+                // Swap avec la déstructuration
                 [array[i], array[i+1]] = [array[i+1], array[i]];
             }      
         }
@@ -77,6 +76,22 @@ class Sort {
             array[j+1] = current;
         }
     }
+
+    selectionSort(array) {
+        for(let i = 0 ; i < array.length ; i++) {
+            let current_min = array[i];
+            for(let j = i+1 ; j < array.length ; j++) {
+                if (array[j] < current_min) {
+                    current_min = array[j];
+                    this.nbComparisons++;
+                }
+            }
+            let min_index = array.indexOf(current_min);
+            [array[i], array[min_index]] = [array[min_index], array[i]];
+        }
+        return array;
+    }
+
 }
 
 function perform () {
@@ -93,7 +108,7 @@ function perform () {
     rawArray = dataReset();
   
     let sort2 = new Sort(rawArray);
-    sort2.insertionSort(rawArray,0);
+    sort2.insertionSort(rawArray);
     console.log(`Tri par insertion : ${sort2.nbComparisons} comparaisons - [${sort2.arrayToSort}].`);
     prompt("[ENTER]");
 
@@ -101,6 +116,10 @@ function perform () {
     rawArray = dataReset();
   
     let sort3 = new Sort(rawArray);
+    sort3.selectionSort(rawArray);
+    console.log(`Tri par sélection : ${sort3.nbComparisons} comparaisons - [${sort3.arrayToSort}].`);
+    // console.log(`Tri par sélection : - [${sort3.arrayToSort}].`);
+    prompt("[ENTER]");
 }
 
 perform();
