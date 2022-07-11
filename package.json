@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Ju777/THP_dev_w2d2-algorithmie1/issues"
   },
-  "homepage": "https://github.com/Ju777/THP_dev_w2d2-algorithmie1#readme"
+  "homepage": "https://github.com/Ju777/THP_dev_w2d2-algorithmie1#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
 }
