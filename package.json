@@ -1,0 +1,19 @@
+{
+  "name": "thp_dev_w2d2-algorithmie1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ju777/THP_dev_w2d2-algorithmie1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ju777/THP_dev_w2d2-algorithmie1/issues"
+  },
+  "homepage": "https://github.com/Ju777/THP_dev_w2d2-algorithmie1#readme"
+}
