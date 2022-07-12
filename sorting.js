@@ -7,7 +7,7 @@ function validateInputFile(argument) {
         return true;
     }
     else {
-        console.log("Erreur : veuillez entrez node sorting_class.js list.txt .");
+        console.log("Erreur, veuillez saisir :\n-> node sorting.js list.txt <-");
         return false;
     }
 }
@@ -66,8 +66,9 @@ class Sort {
                 [array[i], array[i+1]] = [array[i+1], array[i]];
             }      
         }
-        
         this.bubbleSort(array, limit - 1);
+
+        return array;
     }
 
     insertionSort(array) {
@@ -81,6 +82,8 @@ class Sort {
             }
             array[j+1] = current;
         }
+
+        return array;
     }
 
     selectionSort(array) {
@@ -98,6 +101,39 @@ class Sort {
         return array;
     }
 
+    quickSort(array, start, end) { // Using recursion
+        // Base cases
+        if (start >= end ) { return array; }
+        else {
+            let pivIndex = this.partition(array, start, end);
+            this.quickSort(array, start, pivIndex-1);
+            this.quickSort(array, pivIndex+1, end);
+            return array;
+        }
+    }
+
+    partition(array, start, end) {
+        let pivot = array[start];
+        let partIndex = start+1;
+
+        // Boucle : on compare chaque élément du tableau avec le pivot
+        // Si l'élément est plus petit => swap entre l'élément et l'élément qui est au pIndex.
+        for(let j = start+1 ; j <= end ; j++) {
+
+            if (array[j] < pivot) {
+                this.nbComparisons++;
+                // on fait le swap en question.
+                [array[j], array[partIndex]] = [array[partIndex], array[j]];
+                // l'index de partition avance d'un cran pour isoler la partie triée sur la gauche
+                partIndex++;
+            }
+        }
+
+        //Quand toutes les valeurs ont été testées (et donc triés gauche/droite)
+        // Il faut placer le pivot juste avant le partIndex : pour cela on fait donc un swap entre pivot et array[partIndex-1]
+        [array[start], array[partIndex-1]] = [array[partIndex-1], array[start]];
+        return partIndex-1;        
+    }
 }
 
 function perform () {
@@ -106,25 +142,33 @@ function perform () {
     if (rawArray !== false) {
         let sort = new Sort(rawArray);
 
-        // Lancement du tri à bulles de list.txt
-        sort.bubbleSort(rawArray, rawArray.length - 1);
-        console.log(`Tri à bulles : ${sort.nbComparisons} comparaisons - [${sort.arrayToSort}].`);
+        // Lancement du tri à bulles
+        let bubbleSorting = sort.bubbleSort(rawArray, rawArray.length - 1);
+        console.log(`Tri à bulles : ${sort.nbComparisons} comparaisons - [${bubbleSorting}].`);
         prompt("[ENTER]");
 
-        // Lancement du tri par insertion de list.txt
+        // Lancement du tri par insertion
         rawArray = dataReset();
         sort.resetNbComparisons();
-        // let sort2 = new Sort(rawArray);
-        sort.insertionSort(rawArray);
-        console.log(`Tri par insertion : ${sort.nbComparisons} comparaisons - [${sort.arrayToSort}].`);
+
+        let insertionSorting = sort.insertionSort(rawArray);
+        console.log(`Tri par insertion : ${sort.nbComparisons} comparaisons - [${insertionSorting}].`);
         prompt("[ENTER]");
 
-        // Lancement du tri par sélection de list.txt
+        // Lancement du tri par sélection
         rawArray = dataReset();
-        // let sort3 = new Sort(rawArray);
         sort.resetNbComparisons();
-        sort.selectionSort(rawArray);
-        console.log(`Tri par sélection : ${sort.nbComparisons} comparaisons - [${sort.arrayToSort}].`);
+        
+        let selectionSorting = sort.selectionSort(rawArray);
+        console.log(`Tri par sélection : ${sort.nbComparisons} comparaisons - [${selectionSorting}].`);
+        prompt("[ENTER]");
+
+        // Lancement du tri rapide
+        rawArray = dataReset();
+        sort.resetNbComparisons();
+        
+        let quickSorting = sort.quickSort(rawArray, 0, rawArray.length - 1);
+        console.log(`Tri rapide : ${sort.nbComparisons} comparaisons - [${quickSorting}].`);
         prompt("[ENTER]");
     }
 }
