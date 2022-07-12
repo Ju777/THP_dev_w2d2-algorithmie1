@@ -41,8 +41,8 @@ function dataReset(){
 }
 
 class Sort {
-    constructor(arrayToSort) {
-        this.arrayToSort = arrayToSort;
+    constructor() {
+        // this.arrayToSort = arrayToSort;
         this.nbComparisons = 0;
     }
 
@@ -140,7 +140,8 @@ function perform () {
     var rawArray = dataReset();
     
     if (rawArray !== false) {
-        let sort = new Sort(rawArray);
+        // let sort = new Sort(rawArray);
+        let sort = new Sort();
 
         // Lancement du tri à bulles
         let bubbleSorting = sort.bubbleSort(rawArray, rawArray.length - 1);
